@@ -50,7 +50,7 @@ namespace HOPEless.Bancho.Objects
         public string ActionText;
         public string BeatmapChecksum;
         public Mods CurrentMods;
-        public GameMode PlayMode;
+        public byte PlayMode;
         public int BeatmapId;
         
         public BanchoUserStatus() { }
@@ -62,7 +62,7 @@ namespace HOPEless.Bancho.Objects
             ActionText = r.ReadString();
             BeatmapChecksum = r.ReadString();
             CurrentMods = (Mods)r.ReadUInt32();
-            PlayMode = (GameMode)r.ReadByte();
+            PlayMode = r.ReadByte();
             BeatmapId = r.ReadInt32();
         }
 
@@ -72,7 +72,7 @@ namespace HOPEless.Bancho.Objects
             w.Write(ActionText);
             w.Write(BeatmapChecksum);
             w.Write((uint)CurrentMods);
-            w.Write((byte)PlayMode);
+            w.Write(PlayMode);
             w.Write(BeatmapId);
         }
     }
@@ -85,7 +85,7 @@ namespace HOPEless.Bancho.Objects
         public int Timezone;
         public byte CountryCode;
         public PlayerRank Permissions;
-        public GameMode PlayMode;
+        public byte PlayMode;
         public float Longitude;
         public float Latitude;
         public int Rank;
@@ -105,7 +105,7 @@ namespace HOPEless.Bancho.Objects
 
             byte permissionPlaymodeBitfield = r.ReadByte();
             Permissions = (PlayerRank)(permissionPlaymodeBitfield & 0b00011111);
-            PlayMode = (GameMode)((permissionPlaymodeBitfield & 0b11100000) >> 5);
+            PlayMode = (byte)((permissionPlaymodeBitfield & 0b11100000) >> 5);
 
             Longitude = r.ReadSingle();
             Latitude = r.ReadSingle();
@@ -118,7 +118,7 @@ namespace HOPEless.Bancho.Objects
             w.Write(Username);
             w.Write((byte)(Timezone + 24));
             w.Write(CountryCode);
-            w.Write((byte)(((byte)Permissions & 0b00011111) | (((byte)PlayMode & 0b00000111) << 5)));   //bitwise and isn't needed, but it looks cool and is consistent with the reading
+            w.Write((((byte)Permissions & 0b00011111) | (((byte)PlayMode & 0b00000111) << 5)));   //bitwise and isn't needed, but it looks cool and is consistent with the reading
             w.Write(Longitude);
             w.Write(Latitude);
             w.Write(Rank);
