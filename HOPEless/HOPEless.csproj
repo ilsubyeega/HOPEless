@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Project">
-    <TargetFrameworks>netstandard1.0;net35</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -31,8 +31,8 @@
     <DocumentationFile>bin\Release\$(TargetFramework)\HOPEless.xml</DocumentationFile>
   </PropertyGroup>
 
-  <ItemGroup Label="Package References">
-    <PackageReference Include="osu.Shared" Version="1.0.3" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\osu.Shared\osu.Shared\osu.Shared.csproj" />
   </ItemGroup>
 
 </Project>
