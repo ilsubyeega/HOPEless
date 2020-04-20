@@ -47,8 +47,8 @@ namespace HOPEless.Bancho.Objects
     public class BanchoUserStatus : ISerializable
     {
         public BanchoAction Action;
-        public string ActionText;
-        public string BeatmapChecksum;
+        public string ActionText = "";
+        public string BeatmapChecksum = "";
         public Mods CurrentMods;
         public byte PlayMode;
         public int BeatmapId;
